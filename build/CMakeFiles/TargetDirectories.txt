@@ -1,0 +1,4 @@
+/Users/hasircioglu/projects/self-examples/build/CMakeFiles/server.dir
+/Users/hasircioglu/projects/self-examples/build/CMakeFiles/client.dir
+/Users/hasircioglu/projects/self-examples/build/CMakeFiles/edit_cache.dir
+/Users/hasircioglu/projects/self-examples/build/CMakeFiles/rebuild_cache.dir

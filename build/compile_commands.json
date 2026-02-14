@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/Users/hasircioglu/projects/self-examples/build",
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -o CMakeFiles/server.dir/main.cpp.o -c /Users/hasircioglu/projects/self-examples/cpp_coroutinues_and_boost_asi_tcp_server/main.cpp",
+  "file": "/Users/hasircioglu/projects/self-examples/cpp_coroutinues_and_boost_asi_tcp_server/main.cpp",
+  "output": "CMakeFiles/server.dir/main.cpp.o"
+},
+{
+  "directory": "/Users/hasircioglu/projects/self-examples/build",
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -o CMakeFiles/client.dir/main_client.cpp.o -c /Users/hasircioglu/projects/self-examples/cpp_coroutinues_and_boost_asi_tcp_server/main_client.cpp",
+  "file": "/Users/hasircioglu/projects/self-examples/cpp_coroutinues_and_boost_asi_tcp_server/main_client.cpp",
+  "output": "CMakeFiles/client.dir/main_client.cpp.o"
+}
+]

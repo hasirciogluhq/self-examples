@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
         "jetstream"
-    ]
+    ],
+    "cmake.sourceDirectory": "/Users/hasircioglu/projects/self-examples/cpp_coroutinues_and_boost_asi_tcp_server"
 }
