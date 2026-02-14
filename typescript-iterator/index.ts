@@ -1,4 +1,5 @@
 import { RedisClient } from "bun";
+import Elysia, { sse } from "elysia";
 
 export type Context<T> = {
   emit: (value: T) => void;
@@ -89,7 +90,7 @@ export async function* createTestEventIterator() {
       emit("hello world: " + i);
       i++;
     }
-  }, 100);
+  }, 1000);
 
   try {
     while (!cancelled) {
@@ -103,8 +104,6 @@ export async function* createTestEventIterator() {
         });
       }
     }
-
-    console.log("cnc: ", cancelled);
 
     // Process any remaining events that were emitted before cancellation.
     while (events.length > 0) {
@@ -158,13 +157,25 @@ function testEventIterator() {
 
 // Usage
 
-for await (const message of createTestEventIterator()) {
-  console.log("New message:", message);
+// for await (const message of createTestEventIterator()) {
+//   console.log("New message:", message);
 
-  // You can cancel the event stream if needed
-  if (message === "STOP") {
-    break;
-  }
-}
+//   // You can cancel the event stream if needed
+//   if (message === "STOP") {
+//     break;
+//   }
+// }
 
-console.log("bitti");
+const app = new Elysia()
+  .get("/", async function* () {
+    return Bun.file("sse.html");
+  })
+  .get("/sse", async function* () {
+    for await (const message of createTestEventIterator()) {
+      yield sse(message);
+    }
+  });
+
+app.listen(7070, () => {
+  console.log("Server is running on port 7070, http://localhost:7070");
+});
