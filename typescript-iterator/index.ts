@@ -1,5 +1,7 @@
 import { RedisClient } from "bun";
 import Elysia, { sse } from "elysia";
+import { runPublisher } from "./publisher";
+import { runConsumer } from "./consumer";
 
 export type Context<T> = {
   emit: (value: T) => void;
@@ -136,6 +138,12 @@ function redisEventIterator(channel: string) {
   });
 }
 
+function consumerEventIterator() {
+  return createEventIterator<string>(async ({ emit, cancel }) => {
+    return runConsumer("PAYMENTS", "payments-consumer", { emit });
+  });
+}
+
 function testEventIterator() {
   const client = new RedisClient("redis://default:dev-secret@localhost:6379");
 
@@ -171,11 +179,13 @@ const app = new Elysia()
     return Bun.file("sse.html");
   })
   .get("/sse", async function* () {
-    for await (const message of createTestEventIterator()) {
-      yield sse(message);
+    for await (const message of consumerEventIterator()) {
+      yield sse(JSON.stringify(message));
     }
   });
 
 app.listen(7070, () => {
   console.log("Server is running on port 7070, http://localhost:7070");
 });
+
+const turnOffPublisher = await runPublisher();

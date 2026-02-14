@@ -9,7 +9,15 @@ services:
     ports:
       - 4222:4222
       - 8222:8222
+    command: |
+      -js -sd /data -m 8222
+    volumes:
+      - nats-data:/data:rw
   nats-dashboard:
     image: mdawar/nats-dashboard
     ports:
       - 8000:80
+
+volumes:
+  nats-data:
+    name: nats-data
