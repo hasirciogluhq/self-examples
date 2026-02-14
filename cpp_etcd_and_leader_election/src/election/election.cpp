@@ -95,4 +95,6 @@ void CElection::stop()
     {
         thread->join();
     }
+
+    client->unlock("mama").get();
 };
