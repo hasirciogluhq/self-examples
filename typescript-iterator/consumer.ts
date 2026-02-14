@@ -1,15 +1,19 @@
 import { randomUUIDv7 } from "bun";
-import { AckPolicy, connect, DeliverPolicy, nanos, ReplayPolicy } from "nats";
+import {
+  AckPolicy,
+  connect,
+  DeliverPolicy,
+  nanos,
+  ReplayPolicy,
+  type JetStreamClient,
+  type JetStreamManager,
+} from "nats";
 
-export const runConsumer = async <T>(
+const ensureConsumerExists = async (
   stream: string,
   durableName: string,
-  { emit }: { emit: (data: T) => void },
+  jsm: JetStreamManager,
 ) => {
-  const nc = await connect({});
-  const js = nc.jetstream();
-  const jsm = await nc.jetstreamManager();
-
   const consumers = jsm.consumers.list(stream);
 
   let found = false;
@@ -51,6 +55,19 @@ export const runConsumer = async <T>(
       filter_subject: "payments.>",
     });
   }
+};
+
+export const runConsumer = async <T>(
+  stream: string,
+  durableName: string,
+  { emit }: { emit: (data: T) => void },
+) => {
+  const nc = await connect({});
+  const js = nc.jetstream();
+  const jsm = await nc.jetstreamManager();
+
+  await ensureConsumerExists(stream, durableName, jsm);
+
   const consumer = await js.consumers.get(stream, durableName);
 
   const consume = await consumer.consume();
@@ -65,7 +82,7 @@ export const runConsumer = async <T>(
   return async () => {
     consume.stop();
     await consume.close();
-    await nc.drain()
-    await nc.close()
+    await nc.drain();
+    await nc.close();
   };
 };
