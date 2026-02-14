@@ -16,7 +16,10 @@ export type Subscriber<T> = (
 
 export async function* createEventIterator<T>(
   subscriber: Subscriber<T>,
-): AsyncGenerator<T> {
+): AsyncGenerator<{
+  data: T;
+  unsubscribe: void | CleanupFn;
+}> {
   const events: T[] = [];
   let cancelled = false;
 
@@ -42,7 +45,10 @@ export async function* createEventIterator<T>(
     while (!cancelled) {
       // If there are events in the queue, yield the next event
       if (events.length > 0) {
-        yield events.shift()!;
+        yield {
+          data: events.shift()!,
+          unsubscribe: unsubscribe,
+        };
       } else {
         // Wait for the next event
         await new Promise<void>((resolve) => {
@@ -53,7 +59,10 @@ export async function* createEventIterator<T>(
 
     // Process any remaining events that were emitted before cancellation.
     while (events.length > 0) {
-      yield events.shift()!;
+      yield {
+        data: events.shift()!,
+        unsubscribe: unsubscribe,
+      };
     }
   } finally {
     await unsubscribe?.();
@@ -138,10 +147,26 @@ function redisEventIterator(channel: string) {
   });
 }
 
-function consumerEventIterator() {
-  return createEventIterator<string>(async ({ emit, cancel }) => {
-    return runConsumer("PAYMENTS", "payments-consumer", { emit });
+async function consumerEventIterator() {
+  let unsubscribe: (() => Promise<void>) | undefined = undefined;
+
+  const iterator = createEventIterator<string>(async ({ emit, cancel }) => {
+    unsubscribe = await runConsumer("PAYMENTS", "payments-consumer", {
+      emit,
+    });
+    return unsubscribe;
   });
+
+  while (!!unsubscribe) {
+    await new Promise((resolve) => setTimeout(resolve, 10));
+  }
+
+  return {
+    iterator: iterator,
+    unsubscribe: async () => {
+      if (!!unsubscribe) await unsubscribe();
+    },
+  };
 }
 
 function testEventIterator() {
@@ -178,9 +203,28 @@ const app = new Elysia()
   .get("/", async function* () {
     return Bun.file("sse.html");
   })
-  .get("/sse", async function* () {
-    for await (const message of consumerEventIterator()) {
-      yield sse(JSON.stringify(message));
+  .get("/sse", async function* ({ request }) {
+    const signal = request.signal; // ← abort signal
+    const consumer = await consumerEventIterator();
+
+    // optional: clean‑up callback when abort happens
+    signal.addEventListener("abort", async () => {
+      console.log("Client disconnected → stop consumer");
+      await consumer.unsubscribe();
+    });
+
+    try {
+      for await (const msg of consumer.iterator) {
+        // stop early if the client already left
+        if (signal.aborted) break;
+        // send the SSE chunk
+        yield sse(JSON.stringify(msg.data));
+      }
+    } finally {
+      // always run this when the generator ends
+      // (client left, error, or normal finish)
+      console.log("Cleaning up consumer resources");
+      await consumer.unsubscribe();
     }
   });
 
