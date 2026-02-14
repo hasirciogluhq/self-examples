@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/Users/hasircioglu/projects/self-examples/build",
+  "command": "/usr/bin/clang++ -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_CHRONO_DYN_LINK -DBOOST_CHRONO_NO_LIB -DBOOST_CONTAINER_DYN_LINK -DBOOST_CONTAINER_NO_LIB -DBOOST_DATE_TIME_DYN_LINK -DBOOST_DATE_TIME_NO_LIB -DBOOST_THREAD_DYN_LINK -DBOOST_THREAD_NO_LIB -DCPPREST_EXCLUDE_WEBSOCKETS=1 -DCPPREST_FORCE_HTTP_CLIENT_ASIO -DCPPREST_FORCE_HTTP_LISTENER_ASIO -DCPPREST_NO_SSL_LEAK_SUPPRESS -I\"/Users/hasircioglu/projects/self-examples/cpp_etcd_and_leader_election/./src/**/*.hpp\" -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -o CMakeFiles/server.dir/src/main.cpp.o -c /Users/hasircioglu/projects/self-examples/cpp_etcd_and_leader_election/src/main.cpp",
+  "file": "/Users/hasircioglu/projects/self-examples/cpp_etcd_and_leader_election/src/main.cpp",
+  "output": "CMakeFiles/server.dir/src/main.cpp.o"
+},
+{
+  "directory": "/Users/hasircioglu/projects/self-examples/build",
+  "command": "/usr/bin/clang++ -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_CHRONO_DYN_LINK -DBOOST_CHRONO_NO_LIB -DBOOST_CONTAINER_DYN_LINK -DBOOST_CONTAINER_NO_LIB -DBOOST_DATE_TIME_DYN_LINK -DBOOST_DATE_TIME_NO_LIB -DBOOST_THREAD_DYN_LINK -DBOOST_THREAD_NO_LIB -DCPPREST_EXCLUDE_WEBSOCKETS=1 -DCPPREST_FORCE_HTTP_CLIENT_ASIO -DCPPREST_FORCE_HTTP_LISTENER_ASIO -DCPPREST_NO_SSL_LEAK_SUPPRESS -I\"/Users/hasircioglu/projects/self-examples/cpp_etcd_and_leader_election/./src/**/*.hpp\" -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -o CMakeFiles/server.dir/src/election/election.cpp.o -c /Users/hasircioglu/projects/self-examples/cpp_etcd_and_leader_election/src/election/election.cpp",
+  "file": "/Users/hasircioglu/projects/self-examples/cpp_etcd_and_leader_election/src/election/election.cpp",
+  "output": "CMakeFiles/server.dir/src/election/election.cpp.o"
+}
+]

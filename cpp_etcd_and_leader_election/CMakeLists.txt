@@ -12,10 +12,16 @@ find_package(Boost REQUIRED COMPONENTS thread) # opsiyonel
 
 include_directories(
     /usr/local/include
+    ./src/**/*.hpp
     ${Protobuf_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIRS}
 )
 link_directories(/usr/local/lib)
 
-add_executable(server main.cpp)
-target_link_libraries(server PRIVATE etcd-cpp-api Boost::boost ${Boost_LIBRARIES} cpprestsdk::cpprest)
+# main.cpp + election.cpp
+add_executable(server
+    src/main.cpp
+    src/election/election.cpp   # <- implementasyon dosyasını ekle
+)
+
+target_link_libraries(server PRIVATE etcd-cpp-api Boost::boost Boost::thread ${Boost_LIBRARIES} cpprestsdk::cpprest)
