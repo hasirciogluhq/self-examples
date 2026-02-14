@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  nats-jetstram:
+    container_name: "nats-test"
+    image: nats:alpine
+    cpus: 0.1
+    mem_limit: 200m
+    ports:
+      - 4222:4222
+      - 8222:8222
+  nats-dashboard:
+    image: mdawar/nats-dashboard
+    ports:
+      - 8000:80
