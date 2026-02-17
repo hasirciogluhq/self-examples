@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+openai-whisper
+piper
+pathvalidate
+pathlib
+numpy
