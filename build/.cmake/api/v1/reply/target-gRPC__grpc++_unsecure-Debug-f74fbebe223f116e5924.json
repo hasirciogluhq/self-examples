@@ -3,7 +3,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "/opt/homebrew/lib/libgrpc++.1.78.0.dylib"
+			"path" : "/opt/homebrew/lib/libgrpc++_unsecure.1.78.1.dylib"
 		}
 	],
 	"backtrace" : 5,
@@ -50,13 +50,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 203,
+				"line" : 239,
 				"parent" : 4
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 205,
+				"line" : 241,
 				"parent" : 4
 			}
 		]
@@ -66,7 +66,7 @@
 		"major" : 2,
 		"minor" : 9
 	},
-	"id" : "gRPC::grpc++::@6890427a1f51a3e7e1df",
+	"id" : "gRPC::grpc++_unsecure::@6890427a1f51a3e7e1df",
 	"imported" : true,
 	"interfaceCompileDependencies" : 
 	[
@@ -100,7 +100,7 @@
 		},
 		{
 			"backtrace" : 6,
-			"id" : "gRPC::grpc::@6890427a1f51a3e7e1df"
+			"id" : "gRPC::grpc_unsecure::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 6,
@@ -143,7 +143,7 @@
 		},
 		{
 			"backtrace" : 6,
-			"id" : "gRPC::grpc::@6890427a1f51a3e7e1df"
+			"id" : "gRPC::grpc_unsecure::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 6,
@@ -151,8 +151,8 @@
 		}
 	],
 	"local" : true,
-	"name" : "gRPC::grpc++",
-	"nameOnDisk" : "libgrpc++.1.78.0.dylib",
+	"name" : "gRPC::grpc++_unsecure",
+	"nameOnDisk" : "libgrpc++_unsecure.1.78.1.dylib",
 	"paths" : 
 	{
 		"build" : ".",

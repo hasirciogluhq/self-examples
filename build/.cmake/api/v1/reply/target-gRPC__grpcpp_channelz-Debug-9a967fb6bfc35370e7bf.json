@@ -3,7 +3,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "/opt/homebrew/lib/libgrpc++_reflection.1.78.0.dylib"
+			"path" : "/opt/homebrew/lib/libgrpcpp_channelz.1.78.1.dylib"
 		}
 	],
 	"backtrace" : 5,
@@ -50,13 +50,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 230,
+				"line" : 266,
 				"parent" : 4
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 232,
+				"line" : 268,
 				"parent" : 4
 			}
 		]
@@ -66,7 +66,7 @@
 		"major" : 2,
 		"minor" : 9
 	},
-	"id" : "gRPC::grpc++_reflection::@6890427a1f51a3e7e1df",
+	"id" : "gRPC::grpcpp_channelz::@6890427a1f51a3e7e1df",
 	"imported" : true,
 	"interfaceCompileDependencies" : 
 	[
@@ -95,8 +95,8 @@
 		}
 	],
 	"local" : true,
-	"name" : "gRPC::grpc++_reflection",
-	"nameOnDisk" : "libgrpc++_reflection.1.78.0.dylib",
+	"name" : "gRPC::grpcpp_channelz",
+	"nameOnDisk" : "libgrpcpp_channelz.1.78.1.dylib",
 	"paths" : 
 	{
 		"build" : ".",

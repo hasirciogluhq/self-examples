@@ -3,7 +3,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "/opt/homebrew/lib/libgrpc_authorization_provider.1.78.0.dylib"
+			"path" : "/opt/homebrew/lib/libgrpc_authorization_provider.1.78.1.dylib"
 		}
 	],
 	"backtrace" : 5,
@@ -240,7 +240,7 @@
 	],
 	"local" : true,
 	"name" : "gRPC::grpc_authorization_provider",
-	"nameOnDisk" : "libgrpc_authorization_provider.1.78.0.dylib",
+	"nameOnDisk" : "libgrpc_authorization_provider.1.78.1.dylib",
 	"paths" : 
 	{
 		"build" : ".",
